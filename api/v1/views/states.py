@@ -43,7 +43,6 @@ def create_state():
     if not request.get_json():
         abort(400, 'Not a JSON')
 
-
     kwargs = request.get_json()
     if 'name' not in kwargs:
         abort(400, 'Missing name')

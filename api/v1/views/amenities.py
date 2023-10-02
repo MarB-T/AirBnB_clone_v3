@@ -62,7 +62,7 @@ def update_amenity(amenity_id):
             abort(400, 'Not a JSON')
         data = request.get_json()
         ignore_keys = ['id', 'created_at', 'updated_at']
-        for key,value in date.items():
+        for key, value in date.items():
             if key not in ignore_keys:
                 setattr(amenity, key, value)
 

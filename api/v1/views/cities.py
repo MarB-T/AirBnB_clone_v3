@@ -2,7 +2,7 @@
 """ create a view for city object """
 
 from flask import abort, jsonify, request
-from  models.state import State
+from models.state import State
 from models.city import City
 from models import storage
 from api.v1.views import app_views
@@ -52,7 +52,7 @@ def create_city(state_id):
         abort(404)
     if not request.get_json():
         abort(400, 'Not a JSON')
-    data =request.get_json()
+    data = request.get_json()
     if 'name' not in data:
         abort(400, 'Missing name')
 
