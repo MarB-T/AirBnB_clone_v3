@@ -24,7 +24,6 @@ def teardown_engine(exc):
     storage.close()
 
 
-
 @app.errorhandler(404)
 def not_found():
     """Handles not found error"""
