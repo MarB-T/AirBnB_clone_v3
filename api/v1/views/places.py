@@ -67,10 +67,10 @@ def create_place(city_id):
     data['city_id'] = city_id
     place = Place(**data)
     place.save()
-    return jsonify(]place.to_dict()), 201
+    return jsonify(place.to_dict()), 201
 
 
-@app_views.route('places/<place_id>', methods=['PUT'],
+@app_views.route('/places/<place_id>', methods=['PUT'],
                  strict_slashes=False)
 def update_place(place_id):
     """update place"""
@@ -79,7 +79,7 @@ def update_place(place_id):
         if not request.get_json():
             abort(400, 'Not a JSON')
         data = request.get_json()
-        ignore_keys ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
+        ignore_keys = ['id', 'user_id', 'city_id', 'created_at', 'updated_at']
         for key, value in data.items():
             if key not in ignore_keys:
                 setattr(place, key, value)
@@ -108,47 +108,47 @@ def places_search():
     """search places based on given json """
     if request.get_json() is None:
         abort(400, description='Not a JSON')
-        data = request.get_json()
+    data = request.get_json()
 
-        if data and len(data):
-            states = data.get('states', None)
-            cities = data.get('cities', None)
-            amenities = data.get('amenities', None)
-        if not data or not len(data) or (not states and not cities
-                                         and not amenities):
-            places = storage.all(Place).values()
-            list_places = []
-            for place in places:
-                list_places.append(place.to_dict())
-            return jsonify(list_places)
+    if data and len(data):
+        states = data.get('states', None)
+        cities = data.get('cities', None)
+        amenities = data.get('amenities', None)
+    if not data or not len(data) or (not states and not cities
+                                     and not amenities):
+        places = storage.all(Place).values()
         list_places = []
-        if states:
-            list_states = [storage.get(State, state_id) for s_id in states]
-            for state in list_states:
-                if state:
-                    for city in state.cities:
-                        if city:
-                            for place in city.places:
-                                list_places.append(place)
-        if cities:
-            city_obj = [storage.get(City, city_id) for city_id in cities]
-            for city in city_obj:
-                if city:
-                    for place in city.places:
-                        if place not in list_places:
+        for place in places:
+            list_places.append(place.to_dict())
+        return jsonify(list_places)
+    list_places = []
+    if states:
+        list_states = [storage.get(State, state_id) for s_id in states]
+        for state in list_states:
+            if state:
+                for city in state.cities:
+                    if city:
+                        for place in city.places:
                             list_places.append(place)
-        if amenities:
-            if not list_places:
-                list_places = storage.all(Place).values()
+    if cities:
+        city_obj = [storage.get(City, city_id) for city_id in cities]
+        for city in city_obj:
+            if city:
+                for place in city.places:
+                    if place not in list_places:
+                        list_places.append(place)
+    if amenities:
+        if not list_places:
+            list_places = storage.all(Place).values()
             amenities_obj = [storage.get(Amenity, amenity_id) for amenity_id in
                              amenities]
             list_places = [place for place in list_places
                            if all([am in place.amenities
                                   for am in amenities_obj])]
-        places = []
-        for plc in list_places:
-            d = plc.to_dict()
-            d.pop('amenities', None)
-            places.append(d)
+    places = []
+    for plc in list_places:
+        d = plc.to_dict()
+        d.pop('amenities', None)
+        places.append(d)
 
-        return jsonify(places)
+    return jsonify(places)

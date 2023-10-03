@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" 
+"""
 Create routes to get status of the api
 """
 

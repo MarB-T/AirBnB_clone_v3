@@ -11,7 +11,7 @@ from models import storage
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET'],
-        strict_slashes=False)
+                 strict_slashes=False)
 def get_reviews_by_place(place_id):
     """ get review by place id"""
     place = storage.get(Place, place_id)
@@ -79,7 +79,7 @@ def update_review(review_id):
         if not request.get_json():
             abort(400, 'Not a JSON')
         data = request.get_json()
-        ignore_keys ['id', 'user_id', 'place_id', 'created_at', 'updated_at']
+        ignore_keys = ['id', 'user_id', 'place_id', 'created_at', 'updated_at']
         for key, value in data.items():
             if key not in ignore_keys:
                 setattr(review, key, value)

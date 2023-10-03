@@ -59,22 +59,22 @@ def create_user():
 
 
 @app_views.route('/user/<user_id>', methods=['PUT'],
-        strict_slashes=False)
+                 strict_slashes=False)
 def update_user(user_id):
     """update user """
     user = storage.get(User, user_id)
     if not request.get_json():
         abort(400, 'Not a JSON')
 
-        data = request.get_json()
-        ignore_keys = ['id', 'email', 'created_at', 'updated_at']
-        for key, value in data.items():
-            if key not in ignore_keys:
-                setattr(user, key, value)
-        user.save()
-        return jsonify(user.to_dict()), 200
-    else:
-        abort(404)
+    data = request.get_json()
+    ignore_keys = ['id', 'email', 'created_at', 'updated_at']
+    for key, value in data.items():
+        if key not in ignore_keys:
+            setattr(user, key, value)
+            user.save()
+            return jsonify(user.to_dict()), 200
+        else:
+            abort(404)
 
 
 @app_views.errorhandler(404)
