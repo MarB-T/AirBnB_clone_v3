@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" create a view for state objects to handle RESTFUL api """
+"""
+create a view for state objects to handle RESTFUL api
+"""
 
 from flask import abort, jsonify, request
 from models.state import State

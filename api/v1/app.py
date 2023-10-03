@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""script that register the blueprint app_views to your Flask instance app"""
+"""
+script that register the blueprint app_views to your Flask instance app
+"""
 
 from api.v1.views import app_views
 from flask import Flask, jsonify
@@ -20,13 +22,13 @@ app.url_map.strict_slashes = False
 
 @app.teardown_appcontext
 def teardown_engine(exc):
-    """remove current SQLAlchemy session"""
+    """ remove current SQLAlchemy session """
     storage.close()
 
 
 @app.errorhandler(404)
 def not_found():
-    """Handles not found error"""
+    """ Handles not found error """
     response = {'error': 'Not found'}
     return jsonify(response), 404
 

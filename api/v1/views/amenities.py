@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Create amenity object to handle all default RESTFul api """
+"""
+Create amenity object to handle all default RESTFul api
+"""
 
 from flask import abort, jsonify, request
 from api.v1.views import api_views

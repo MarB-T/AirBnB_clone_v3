@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" Create routes to get status of the api"""
+""" 
+Create routes to get status of the api
+"""
 
 from flask import jsonify
 from api.v1.views import app_views
@@ -13,7 +15,7 @@ def api_status():
     return jsonify(response)
 
 
-@app_views.route('/status', methods=['GET'])
+@app_views.route('/api/v1/stats', methods=['GET'])
 def get_stats():
     """ return number of objects by type"""
     stats = {
