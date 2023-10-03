@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Create routes to get status of the api
+Create routes to get status of the api and the number of objects of each type
 """
 
 from flask import jsonify
