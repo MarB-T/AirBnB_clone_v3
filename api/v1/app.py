@@ -27,7 +27,7 @@ def teardown_engine(exc):
 
 
 @app.errorhandler(404)
-def not_found():
+def not_found(error):
     """ Handles not found error """
     response = {'error': 'Not found'}
     return jsonify(response), 404
