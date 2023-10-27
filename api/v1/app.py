@@ -5,7 +5,7 @@ script that register the blueprint app_views to your Flask instance app
 
 from api.v1.views import app_views
 from flask import Flask, jsonify
-from flask_core import CORS
+from flask_cors import CORS
 from models import storage
 from os import getenv
 

@@ -59,8 +59,8 @@ def update_state(state_id):
     """ update states """
     state = storage.get(State, state_id)
     if state:
-        if not request.get_json()
-        abort(400, 'Not a JSON')
+        if not request.get_json():
+            abort(400, 'Not a JSON')
 
         data = request.get_json()
         ignore_keys = ['id', 'created_at', 'updated_at']
@@ -72,14 +72,14 @@ def update_state(state_id):
         abort(404)
 
 
-@app_views.errorhandlers(404)
+@app_views.errorhandler(404)
 def not_found(error):
     """handle not found error"""
     response = {'error': 'Not found'}
     return jsonify(response), 404
 
 
-@app_views.errorhandlers(400)
+@app_views.errorhandler(400)
 def bad_request(error):
     """handle bad requests"""
     response = {'error': 'Bad Request'}

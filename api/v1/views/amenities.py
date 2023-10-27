@@ -4,9 +4,10 @@ Create amenity object to handle all default RESTFul api
 """
 
 from flask import abort, jsonify, request
+from models.amenity import Amenity
 from api.v1.views import api_views
 from models import storage
-from models.amenity import Amenity
+'''from models.amenity import Amenity'''
 
 
 @app_views.route('/amenities', methods=['GET'],
@@ -41,7 +42,7 @@ def del_amenity(amenity_id):
         abort(404)
 
 
-@app_views.route('/amenities', methods=['POST'] strict_slashes=False)
+@app_views.route('/amenities', methods=['POST'], strict_slashes=False)
 def create_amenity():
     """ creates an amenity object """
     if not request.get_json():
